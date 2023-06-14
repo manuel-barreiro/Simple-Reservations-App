@@ -8,26 +8,27 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Reservations</h1>
-    <ul>
-    <% todos.forEach( el => { %>
-            <li class='todoItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.people %><%= el.fecha %><%= el.horario %></span>
-                <span class='del'> Delete </span>
-            </li>
-    <% }) %>    
-    </ul>
-
-    <h2><%= user.userName %> has <%= left %> things left to do.</h2>
-
-    <form action="/todos/createTodo" method='POST'>
+    <h1>Bienvenido a Restaurant, <%= user.userName %></h1>
+    
+    <h3>Reserve una mesa</h3>
+    <form action="/reservations/createRes" method='POST'>
         <!-- <input type="text" placeholder="Enter Todo Item" name='todoItem'>
         <input type="submit"> -->
-        <input type="number" placeholder="Number of people" name='people' required>
+        <input type="number" placeholder="Cantidad de comensales" name='people' required>
         <input type="date" placeholder="Fecha" name="fecha" required>
         <input type="time" placeholder="Horario" name="horario" required>
-        <input type="submit">
+        <input type="submit" value="Reservar">
     </form>
+
+    <h3>Sus reservas</h3>
+    <ul>
+        <% res.forEach( el => { %>
+                <li data-id='<%=el._id%>'>
+                    <span %>'><%= el.people %> people - <%= el.fecha %> - <%= el.horario %></span>
+                    <span class='del'> Delete </span>
+                </li>
+        <% }) %>    
+    </ul>
 
     <a href="/logout">Logout</a>
 
